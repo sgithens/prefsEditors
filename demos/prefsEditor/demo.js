@@ -21,7 +21,8 @@ var demo = demo || {};
     // employ a system based around the kettle configuration that the rest
     // of GPII is using.
     demo.prefsServerUrl = {
-        production: "http://preferences.gpii.net/",
+        //swg production: "http://preferences.gpii.net/",
+        production: "http://localhost:8081/",
         development: "http://localhost:8081/"
     };
 

@@ -60,6 +60,10 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                 "funcName": "gpii.prefs.gpiiSession.getLoggedUser",
                 "args": ["{that}", "{that}.events.onGetLoggedUserSuccess", "{that}.events.onGetLoggedUserError"]
             },
+            steveTest: {
+                "funcName": "gpii.prefs.gpiiSession.steveTest",
+                "args": ["{that}"]
+            },
             setLoggedUser: {
                 "funcName": "gpii.prefs.gpiiSession.setLoggedUser",
                 "args": ["{that}", "{arguments}.0"]
@@ -72,6 +76,9 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
         listeners: {
             "onCreate.getLoggedUser": {
                 "listener": "{that}.getLoggedUser"
+            },
+            "onCreate.steveTest": {
+                "listener": "{that}.steveTest"
             },
             "onGetLoggedUserSuccess.setLoggedUser": {
                 "listener": "{that}.setLoggedUser"
@@ -142,6 +149,11 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
         }
     };
 
+    gpii.prefs.gpiiSession.steveTest = function (that) {
+        console.log("Check out the great Steve Test function!");
+        console.log("Hmm: " + window.location.search);
+    };
+
     gpii.prefs.gpiiSession.getLoggedUser = function (that, onGetLoggedUserSuccessEvent, onGetLoggedUserErrorEvent) {
         $.ajax({
             url: that.options.url + "userToken",
@@ -153,12 +165,12 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                 withCredentials: true
             },*/
             success: function (data) {
-                fluid.log("GET: " + data);
+                console.log("GET: " + data);
 
                 onGetLoggedUserSuccessEvent.fire(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                fluid.log("GET: Error at getting logged user's token! Test status: " + textStatus);
+                console.log("GET: Error at getting logged user's token! Test status: " + textStatus);
                 fluid.log(errorThrown);
 
                 onGetLoggedUserErrorEvent.fire();
@@ -167,7 +179,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
     };
 
     gpii.prefs.gpiiSession.setLoggedUser = function (that, data) {
-        that.options.loggedUser = data;
+        that.options.loggedUser = window.location.search.split("=")[1] //swg data;
     };
 
     gpii.prefs.gpiiSession.clearLoggedUser = function (that) {

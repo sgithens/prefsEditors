@@ -599,4 +599,22 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
         onOffModelKey: "screenReaderBrailleOutput"
     });
 
+    fluid.defaults("gpii.adjuster.windowsOnscreenKeyboard", {
+        gradeNames: ["gpii.adjuster.onOffSwitch", "autoInit"],
+        preferenceMap: {
+            "gpii.primarySchema.windowsOnscreenKeyboard": {
+                "model.windowsOnscreenKeyboard": "default"
+            }
+        },
+        //selectors: {
+        //    screenReaderBrailleOutputDescription: ".gpiic-screenReaderBrailleOutput-description"
+        //},
+        protoTree: {
+            valueCheckbox: "${windowsOnscreenKeyboard}",
+            headingLabel: {messagekey: "windowsOnscreenKeyboardLabel"}
+            //screenReaderBrailleOutputDescription: {messagekey: "screenReaderBrailleOutputDescription"}
+        },
+        onOffModelKey: "windowsOnscreenKeyboard"
+    });
+
 })(fluid);

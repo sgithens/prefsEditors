@@ -75,7 +75,9 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
             "http://registry\\.gpii\\.net/common/tracking": "gpii_primarySchema_tracking",
             "http://registry\\.gpii\\.net/common/trackingTTS": "gpii_primarySchema_screenReaderTracking",
             "http://registry\\.gpii\\.net/common/magnifierPosition": "gpii_primarySchema_magnificationPosition",
-            "http://registry\\.gpii\\.net/common/showCrosshairs": "gpii_primarySchema_showCrosshairs"
+            "http://registry\\.gpii\\.net/common/showCrosshairs": "gpii_primarySchema_showCrosshairs",
+            "http://registry\\.gpii\\.net/common/lowResEnabled": "gpii_primarySchema_lowResolutionEnabled",
+            "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard": "gpii_primarySchema_windowsOnscreenKeyboard"
         };
 
     gpii.prefs.commonTermsInverseTransformationRules = fluid.model.transform.invertConfiguration(gpii.prefs.commonTermsTransformationRules);
@@ -183,7 +185,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
         var transformedModel = [];
         var preferences = session.options.preferenceSet;
         var contexts = session.options.context;
-
+        console.log("The new model is: \n"+model);
         fluid.each(preferences, function (preference) {
             transformedModel.push(modelTransformFunc(JSON.parse(preference)));
         });
@@ -222,7 +224,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
                 $.extend(dataToSend.contexts, newSet);
             }
         });
-        
+
         var urlToPost, requestType;
         if (session.options.loggedUser) {
             urlToPost = settings.url + "preferences/" + session.options.loggedUser;

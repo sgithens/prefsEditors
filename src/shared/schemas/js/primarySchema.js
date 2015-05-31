@@ -13,7 +13,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
 
 (function (fluid) {
     "use strict";
-    
+
     fluid.registerNamespace("gpii");
 
     gpii.primarySchema = {
@@ -134,7 +134,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
         },
         "gpii.primarySchema.universalVolume": {
             "type": "number",
-            "default": 80,
+            "default": 79,
             "minimum": 0,
             "maximum": 100,
             "divisibleBy": 10
@@ -143,6 +143,30 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
             "type": "string",
             "default": "en",
             "enum": ["en", "el", "de", "es"]
+        },
+        "gpii.primarySchema.lowResolutionEnabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "gpii.primarySchema.windowsOnscreenKeyboard": {
+            "type": "boolean",
+            "default": false
+        },
+        "gpii.primarySchema.readWriteGoldEnabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "gpii.primarySchema.readWriteGoldVoice": {
+            "type": "string",
+            "default": "Word",
+            "enum": ["Emily", "Daniel", "Serena", "Indian Sangeeta"]
+        },
+        "gpii.primarySchema.readWriteGoldSpeed": {
+            "type": "number",
+            "default": 50,
+            "minimum": 0,
+            "maximum": 100,
+            "divisibleBy": 10
         }
     };
 

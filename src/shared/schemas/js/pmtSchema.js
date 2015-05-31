@@ -13,7 +13,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
 
 (function ($, fluid) {
     "use strict";
-    
+
     fluid.registerNamespace("gpii.pmt");
 
     gpii.pmt.auxiliarySchema = {
@@ -27,7 +27,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
 
         // The preference-specific information:
         "groups": {
-            "addContrast": {
+            /* "addContrast": {
                 "container": ".gpii-prefsEditor-contrastPanel",
                 "template": "%prefix/addContrastTemplate.html",
                 "message": "%prefix/contrast.json",
@@ -36,14 +36,14 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                     "always": ["contrastEnabled"],
                     "gpii.primarySchema.contrastEnabled": ["contrastTheme"]
                 }
-            },
+            }, */
             "increaseSize": {
                 "type": "gpii.panel.increaseSizePMT",
                 "container": ".gpiic-prefsEditor-increaseSizePanel",
                 "template": "%prefix/increaseSizeTemplatePMT.html",
                 "message": "%prefix/increaseSize.json",
                 "panels": {
-                    "always": ["textSize", "cursorSize", "magnifierEnabled"],
+                    "always": ["magnifierEnabled", "lowResolutionEnabled"], //sgithens ["textSize", "cursorSize", "magnifierEnabled"],
                     "gpii.primarySchema.magnifierEnabled": ["magnifier", "magnifierPosition", "magnifierFollows", "showCrosshairs"]
                 }
             },
@@ -53,7 +53,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                 "template": "../../src/pmt/pmt-VisualAlternativesGroupContainer.html",
                 "message": "%prefix/message.json",
                 "panels": {
-                    "always": ["speakText", "screenReaderBrailleOutput"],
+                    "always": ["speakText", "screenReaderBrailleOutput", "windowsOnscreenKeyboard"],
                     "gpii.primarySchema.speakText": [
                         "wordsSpokenPerMinute", "volume", "visualAlternativesMoreLess"
                     ],
@@ -62,6 +62,19 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                     ]
                 }
             },
+            // "readWriteGold": {
+            //     "type": "gpii.panel.readWriteGold",
+            //     "container": ".gpiic-readWriteGold",
+            //     "template": "%prefix/readWriteGoldGroupPanel.html",
+            //     "message": "%prefix/readWriteGold.json",
+            //     "panels": {
+            //         "always": ["readWriteGoldEnabled"],
+            //         "gpii.primarySchema.readWriteGoldEnabled": [
+            //             "readWriteGoldVoice", "readWriteGoldSpeed"
+            //         ]
+            //     }
+            // }
+/*swg
             "volume": {
                 "type": "gpii.panel.volumeCollectivePanel",
                 "container": ".gpiic-volumeGroup",
@@ -70,7 +83,8 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                 "panels": {
                     "always": ["universalVolume"]
                 }
-            },
+            }, */
+/*
             "language": {
                 "type": "gpii.panel.languageCollectivePanel",
                 "container": ".gpiic-languageGroup",
@@ -79,21 +93,21 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                 "panels": {
                     "always": ["universalLanguage"]
                 }
-            }
+            } */
         },
-        "contrastEnabled": {
+        /* "contrastEnabled": {
             "type": "gpii.primarySchema.contrastEnabled",
-            /*"enactor": {
-                "type": "gpii.enactor.contrastTheme"
-            },*/
+            //"enactor": {
+            //    "type": "gpii.enactor.contrastTheme"
+            //},
             "panel": {
                 "type": "gpii.adjuster.contrastEnabled",
                 "container": ".gpiic-contrastEnabled",
                 "template": "%prefix/onOffSwitchTemplate.html",
                 "message": "%prefix/contrast.json"
             }
-        },
-        "contrastTheme": {
+        }, */
+        /* "contrastTheme": {
             "type": "gpii.primarySchema.contrast.theme",
             "classes": {
                 "black-white": "fl-theme-prefsEditor-bw gpii-prefsEditor-theme-bw fl-theme-bw",
@@ -111,7 +125,8 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                 "message": "%prefix/contrast.json",
                 "classnameMap": {"theme": "@contrastTheme.classes"}
             }
-        },
+        }, */
+        /*
         "textSize": {
             "type": "gpii.primarySchema.fontSize",
             // "enactor": {
@@ -126,6 +141,8 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                 "previewURL": "../../src/shared/preview/html/textPreview.html"
             }
         },
+        */
+        /*
         "cursorSize": {
             "type": "gpii.primarySchema.cursorSize",
             // "enactor": {
@@ -140,6 +157,46 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                 "previewURL": "../../src/shared/preview/html/cursorPreview.html"
             }
         },
+        */
+        "lowResolutionEnabled": {
+            "type": "gpii.primarySchema.lowResolutionEnabled",
+            // "enactor": {
+            //     "type": "gpii.enactor.magnifier"
+            // },
+            "panel": {
+                "type": "gpii.adjuster.lowResolutionEnabled",
+                "container": ".lowResolutionEnabled",
+                "template": "%prefix/lowResolutionEnabledTemplate.html",
+                "message": "%prefix/lowResolution.json"
+            }
+        },
+        // "readWriteGoldEnabled": {
+        //     "type": "gpii.primarySchema.readWriteGoldEnabled",
+        //     "panel": {
+        //         "type": "gpii.adjuster.readWriteGoldEnabled",
+        //         "container": ".readWriteGoldEnabled",
+        //         "template": "%prefix/readWriteGoldEnabledTemplate.html",
+        //         "message": "%prefix/readWriteGold.json"
+        //     }
+        // },
+        // "readWriteGoldVoice": {
+        //     "type": "gpii.primarySchema.readWriteGoldVoice",
+        //     "panel": {
+        //         "type": "gpii.adjuster.readWriteGoldVoice",
+        //         "container": ".readWriteGoldVoice",
+        //         "template": "%prefix/readWriteGoldVoiceTemplate.html",
+        //         "message": "%prefix/readWriteGold.json"
+        //     }
+        // },
+        // "readWriteGoldSpeed": {
+        //     "type": "gpii.primarySchema.readWriteGoldSpeed",
+        //     "panel": {
+        //         "type": "gpii.adjuster.readWriteGoldSpeed",
+        //         "container": ".readWriteGoldSpeed",
+        //         "template": "%prefix/readWriteGoldSpeedTemplate.html",
+        //         "message": "%prefix/readWriteGold.json"
+        //     }
+        // },
         "magnifierEnabled": {
             "type": "gpii.primarySchema.magnifierEnabled",
             // "enactor": {
@@ -370,6 +427,17 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
             }
         },
 
+        "windowsOnscreenKeyboard": {
+            "type": "gpii.primarySchema.windowsOnscreenKeyboard",
+            "panel": {
+                "type": "gpii.adjuster.windowsOnscreenKeyboard",
+                "template": "%prefix/windowsOnscreenKeyboard.html",
+                "container": ".windowsOnscreenKeyboard",
+                "message": "%prefix/message.json"
+            }
+        }
+
+/*
         "universalVolume": {
             "type": "gpii.primarySchema.universalVolume",
             "panel": {
@@ -378,9 +446,9 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                 "container": ".universalVolume",
                 "message": "%prefix/message.json"
             }
-        },
+        }, */
 
-        "universalLanguage": {
+        /* "universalLanguage": {
             "type": "gpii.primarySchema.universalLanguage",
             "panel": {
                 "type": "gpii.adjuster.universalLanguage",
@@ -388,6 +456,6 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                 "container": ".universalLanguage",
                 "message": "%prefix/message.json"
             }
-        }
+        } */
     };
 })(jQuery, fluid);
