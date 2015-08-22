@@ -53,7 +53,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                 "template": "../../src/pmt/pmt-VisualAlternativesGroupContainer.html",
                 "message": "%prefix/message.json",
                 "panels": {
-                    "always": ["speakText", "screenReaderBrailleOutput", "windowsOnscreenKeyboard"],
+                    "always": ["speakText", "windowsOnscreenKeyboard"], //"screenReaderBrailleOutput", "windowsOnscreenKeyboard"],
                     "gpii.primarySchema.speakText": [
                         "wordsSpokenPerMinute", "volume", "visualAlternativesMoreLess"
                     ],
@@ -62,18 +62,19 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                     ]
                 }
             },
-            // "readWriteGold": {
-            //     "type": "gpii.panel.readWriteGold",
-            //     "container": ".gpiic-readWriteGold",
-            //     "template": "%prefix/readWriteGoldGroupPanel.html",
-            //     "message": "%prefix/readWriteGold.json",
-            //     "panels": {
-            //         "always": ["readWriteGoldEnabled"],
-            //         "gpii.primarySchema.readWriteGoldEnabled": [
-            //             "readWriteGoldVoice", "readWriteGoldSpeed"
-            //         ]
-            //     }
-            // }
+            "readWriteGold": {
+                "type": "gpii.panel.readWriteGold",
+                "container": ".gpiic-readWriteGold",
+                "template": "%prefix/readWriteGoldGroupPanel.html",
+                "message": "%prefix/readWriteGold.json",
+                "panels": {
+                    "always": ["readWriteGoldEnabled"],
+                    "gpii.primarySchema.readWriteGoldEnabled": [
+                        "readWriteGoldVoice", "readWriteGoldPitch", "readWriteGoldSpeed",
+                        "readWriteGoldVolume", "readWriteGoldWordPause"
+                    ]
+                }
+            }
 /*swg
             "volume": {
                 "type": "gpii.panel.volumeCollectivePanel",
@@ -94,7 +95,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                     "always": ["universalLanguage"]
                 }
             } */
-        },
+        }, // End Groups
         /* "contrastEnabled": {
             "type": "gpii.primarySchema.contrastEnabled",
             //"enactor": {
@@ -170,33 +171,60 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                 "message": "%prefix/lowResolution.json"
             }
         },
-        // "readWriteGoldEnabled": {
-        //     "type": "gpii.primarySchema.readWriteGoldEnabled",
-        //     "panel": {
-        //         "type": "gpii.adjuster.readWriteGoldEnabled",
-        //         "container": ".readWriteGoldEnabled",
-        //         "template": "%prefix/readWriteGoldEnabledTemplate.html",
-        //         "message": "%prefix/readWriteGold.json"
-        //     }
-        // },
-        // "readWriteGoldVoice": {
-        //     "type": "gpii.primarySchema.readWriteGoldVoice",
-        //     "panel": {
-        //         "type": "gpii.adjuster.readWriteGoldVoice",
-        //         "container": ".readWriteGoldVoice",
-        //         "template": "%prefix/readWriteGoldVoiceTemplate.html",
-        //         "message": "%prefix/readWriteGold.json"
-        //     }
-        // },
-        // "readWriteGoldSpeed": {
-        //     "type": "gpii.primarySchema.readWriteGoldSpeed",
-        //     "panel": {
-        //         "type": "gpii.adjuster.readWriteGoldSpeed",
-        //         "container": ".readWriteGoldSpeed",
-        //         "template": "%prefix/readWriteGoldSpeedTemplate.html",
-        //         "message": "%prefix/readWriteGold.json"
-        //     }
-        // },
+        "readWriteGoldEnabled": {
+            "type": "gpii.primarySchema.readWriteGoldEnabled",
+            "panel": {
+                "type": "gpii.adjuster.readWriteGoldEnabled",
+                "container": ".readWriteGoldEnabled",
+                "template": "%prefix/onOffSwitchTemplate.html",
+                "message": "%prefix/readWriteGold.json"
+            }
+        },
+        "readWriteGoldVoice": {
+            "type": "gpii.primarySchema.readWriteGoldVoice",
+            "panel": {
+                "type": "gpii.adjuster.readWriteGoldVoice",
+                "container": ".readWriteGoldVoice",
+                "template": "%prefix/readWriteGoldVoiceTemplate.html",
+                "message": "%prefix/readWriteGold.json"
+            }
+        },
+        "readWriteGoldPitch": {
+            "type": "gpii.primarySchema.readWriteGoldPitch",
+            "panel": {
+                "type": "gpii.adjuster.readWriteGoldPitch",
+                "container": ".readWriteGoldPitch",
+                "template": "%prefix/readWriteGoldPitchTemplate.html",
+                "message": "%prefix/readWriteGold.json"
+            }
+        },
+        "readWriteGoldSpeed": {
+            "type": "gpii.primarySchema.readWriteGoldSpeed",
+            "panel": {
+                "type": "gpii.adjuster.readWriteGoldSpeed",
+                "container": ".readWriteGoldSpeed",
+                "template": "%prefix/readWriteGoldSpeedTemplate.html",
+                "message": "%prefix/readWriteGold.json"
+            }
+        },
+        "readWriteGoldVolume": {
+            "type": "gpii.primarySchema.readWriteGoldVolume",
+            "panel": {
+                "type": "gpii.adjuster.readWriteGoldVolume",
+                "container": ".readWriteGoldVolume",
+                "template": "%prefix/readWriteGoldVolumeTemplate.html",
+                "message": "%prefix/readWriteGold.json"
+            }
+        },
+        "readWriteGoldWordPause": {
+            "type": "gpii.primarySchema.readWriteGoldWordPause",
+            "panel": {
+                "type": "gpii.adjuster.readWriteGoldWordPause",
+                "container": ".readWriteGoldWordPause",
+                "template": "%prefix/readWriteGoldWordPauseTemplate.html",
+                "message": "%prefix/readWriteGold.json"
+            }
+        },
         "magnifierEnabled": {
             "type": "gpii.primarySchema.magnifierEnabled",
             // "enactor": {
@@ -417,15 +445,15 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
             }
         },
 
-        "screenReaderBrailleOutput": {
-            "type": "gpii.primarySchema.screenReaderBrailleOutput",
-            "panel": {
-                "type": "gpii.adjuster.screenReaderBrailleOutput",
-                "template": "%prefix/brailleTemplate.html",
-                "container": ".braille",
-                "message": "%prefix/message.json"
-            }
-        },
+        // "screenReaderBrailleOutput": {
+        //     "type": "gpii.primarySchema.screenReaderBrailleOutput",
+        //     "panel": {
+        //         "type": "gpii.adjuster.screenReaderBrailleOutput",
+        //         "template": "%prefix/brailleTemplate.html",
+        //         "container": ".braille",
+        //         "message": "%prefix/message.json"
+        //     }
+        // },
 
         "windowsOnscreenKeyboard": {
             "type": "gpii.primarySchema.windowsOnscreenKeyboard",

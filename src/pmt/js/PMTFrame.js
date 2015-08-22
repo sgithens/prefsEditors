@@ -830,7 +830,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
 
     var sessionObj = null;
     var thatObj = null;
-    
+
     gpii.pmt.pressEsc = function (overlayPanel, modalPanel, addSetLink, event) {
         if (event.keyCode == $.ui.keyCode.ESCAPE){
             overlayPanel.hide();
@@ -844,7 +844,9 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
     };
 
     gpii.pmt.clickSaveAndApplyButton = function (that, session) {
+        console.log("Clicked Save and Apply")
         gpii.pmt.SavePreferenceSets(that, session, session.options.currentSetId);
+        that.showSaveNotification(session.options.loggedUser);
     };
 
     gpii.pmt.keyDownBaseSetLabel = function (that, session, baseSetLabel, selectedIcon, event) {
@@ -944,7 +946,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
         toHour.val("");
         toMin.val("");
         fromHour.focus();
-        
+
         recordLine.removeClass(that.options.styles.visible);
         recordLine.addClass(that.options.styles.invisible);
         notAppliedAtAnyTimesLabelObj.text(notAppliedAtAnyTimesLabelMsg);
@@ -986,7 +988,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
         var value = appliesToLabel + sDeviceSelector.val() + devicesTextLabel;
         appliesToAllDevicesLabel.text(value);
     };
-    
+
     gpii.pmt.clickEmailCopyButton = function (to, body, subject) {
         gpii.pmt.sendWithGmail({
             to: to.val(),
@@ -1011,7 +1013,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
             }
         }
     };
-    
+
     gpii.pmt.validateEmail = function (emailaddress) {
         var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         if (filter.test(emailaddress)) {
@@ -1038,7 +1040,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
                   "&ui=1";
         location.href = str;
     };
-    
+
     gpii.pmt.enableTabConditions = function (that) {
         var tabCondition = that.dom.locate("tabConditions");
         var tabSharing = that.dom.locate("tabShare");
@@ -1108,6 +1110,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
     };
 
     gpii.pmt.SavePreferenceSets = function(that, session, index){
+        console.log("gpii.pmt.SavePreferenceSets");
         // Store preferences so far.
         var model = fluid.copy(that.model);
         var savedSelections = fluid.copy(model);
@@ -1120,7 +1123,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
         session.options.modelSet[index] = JSON.stringify(fluid.copy(model));
     };
 
-    
+
     gpii.pmt.clickDoneButton = function (session, overlayPanel, modalPanel, contextDevice, contextTime, contextUntitled, untitledSelector, untitledDescSelector, setLabel, toLabel, appliesToLabel, devicesTextLabel, sPanel, sModal, addSetLink, that) {
         var timeTemp = contextTime.text().split(toLabel);
         var deviceTemp = contextDevice.text().split(appliesToLabel);
@@ -1220,7 +1223,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
         oPanel.show();
         mPanel.show();
         var setDivs = $(".gpiic-prefsEditor-contextFrame-row");
-        $(setDivs).each(function(index, value) { 
+        $(setDivs).each(function(index, value) {
             if (index >= 0){
                 $(this).removeClass("gpii-prefsEditor-contextFrame-row-selected");
                 $(this).addClass("gpii-prefsEditor-contextFrame-row-unselected");
@@ -1280,7 +1283,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
             contextRow.addClass(that.options.styles.unSelected);
             cRow = contextRow;
         });
-        
+
         cRow.removeClass(that.options.styles.unSelected);
         cRow.addClass(that.options.styles.selected);
         cRow.append(that.options.markup.selectedIcon);
@@ -1291,7 +1294,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
         thatObj = that;
         sessionObj = session;
     };
-    
+
     gpii.pmt.createUntitledBox = function (session, contextRows, untitledSetMarkup, label, desc, that, setLabel, untitledSelector, untitledDescSelector, contextRow) {
 
         var selectedIcon = that.dom.locate("leftArrowIcon");
@@ -1310,7 +1313,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
         contextRow = contextRow + ":last";
         var contextRowElement = $(contextRow);
         contextRowElement.attr("id", session.options.maxSetId +1);
-        
+
         // Store preferences so far
         var savedSelections = fluid.copy(that.model);
         fluid.each(savedSelections, function (value, key) {
@@ -1368,7 +1371,7 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
             icon.addClass(that.options.styles.contextIconLeft);
         }
     };
-    
+
     gpii.pmt.clickBackButton = function (setOverlayPanel, setModalPanel, untitledText) {
         setOverlayPanel.hide();
         setModalPanel.hide();
@@ -1420,5 +1423,5 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
         outerPreviewEnhancerOptions: "{originalEnhancerOptions}.options.originalUserOptions",
         emptyComponentType: "fluid.emptySubcomponent"
     });
-    
+
 })(fluid);

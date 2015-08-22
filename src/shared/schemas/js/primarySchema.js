@@ -158,8 +158,15 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
         },
         "gpii.primarySchema.readWriteGoldVoice": {
             "type": "string",
-            "default": "Word",
+            "default": "Emily",
             "enum": ["Emily", "Daniel", "Serena", "Indian Sangeeta"]
+        },
+        "gpii.primarySchema.readWriteGoldPitch": {
+            "type": "number",
+            "default": 50,
+            "minimum": 0,
+            "maximum": 100,
+            "divisibleBy": 10
         },
         "gpii.primarySchema.readWriteGoldSpeed": {
             "type": "number",
@@ -167,7 +174,22 @@ https://github.com/GPII/prefsEditors/LICENSE.txt
             "minimum": 0,
             "maximum": 100,
             "divisibleBy": 10
+        },
+        "gpii.primarySchema.readWriteGoldVolume": {
+            "type": "number",
+            "default": 70,
+            "minimum": 0,
+            "maximum": 100,
+            "divisibleBy": 10
+        },
+        "gpii.primarySchema.readWriteGoldWordPause": {
+            "type": "number",
+            "default": 0,
+            "minimum": 0,
+            "maximum": 1000,
+            "divisibleBy": 10
         }
+
     };
 
 })(fluid);

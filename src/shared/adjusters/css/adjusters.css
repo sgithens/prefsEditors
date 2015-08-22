@@ -1479,6 +1479,10 @@ input[type=checkbox] + label.gpii-checkbox-label {
     content: "\e010";
 }
 
+.readwritegold-header-icon:before {
+    content: "\e611";
+}
+
 .gpii-preset-button-label {
     z-index: 2;
     position: absolute;

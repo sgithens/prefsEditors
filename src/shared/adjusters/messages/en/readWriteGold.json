@@ -1,1 +1,13 @@
-[]
+{
+    "readWriteGoldPresetButtonLabel": "Read Write Gold",
+    "useReadWriteGoldLabel": "Use Read Write Gold",
+    "readWriteGoldVoiceLabel": "Voice",
+    "readWriteGoldVoiceName-Emily": "Emily",
+    "readWriteGoldVoiceName-Daniel": "Daniel",
+    "readWriteGoldVoiceName-Serena": "Serena",
+    "readWriteGoldVoiceName-Sangeeta": "Sangeeta",
+    "readWriteGoldPitchLabel": "Pitch",
+    "readWriteGoldSpeedLabel": "Speed",
+    "readWriteGoldVolumeLabel": "Volume",
+    "readWriteGoldWordPauseLabel": "Word Pause"
+}

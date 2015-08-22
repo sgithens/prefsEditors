@@ -76,7 +76,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
             "http://registry\\.gpii\\.net/common/trackingTTS": "gpii_primarySchema_screenReaderTracking",
             "http://registry\\.gpii\\.net/common/magnifierPosition": "gpii_primarySchema_magnificationPosition",
             "http://registry\\.gpii\\.net/common/showCrosshairs": "gpii_primarySchema_showCrosshairs",
-            "http://registry\\.gpii\\.net/common/lowResEnabled": "gpii_primarySchema_lowResolutionEnabled",
+            "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.displaySettings": "gpii_primarySchema_lowResolutionEnabled",
             "http://registry\\.gpii\\.net/applications/com\\.microsoft\\.windows\\.onscreenKeyboard": "gpii_primarySchema_windowsOnscreenKeyboard"
         };
 
@@ -169,7 +169,29 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
                 dataType: "json",
                 async: false,
                 success: function (data) {
-                    gpiiModel = modelTransformFunc(fluid.get(data, ["contexts", "gpii-default", "preferences"]));
+                    var rawData = fluid.get(data, ["contexts", "gpii-default", "preferences"]);
+                    gpiiModel = modelTransformFunc(rawData);
+                    /* Start Read Write Gold Prototype */
+                    if (rawData["http://registry.gpii.net/applications/com.texthelp.readWriteGold"]) {
+                        var rwgSettings = rawData["http://registry.gpii.net/applications/com.texthelp.readWriteGold"];
+                        gpiiModel.gpii_primarySchema_readWriteGoldEnabled = true;
+                        if (rwgSettings["ApplicationSettings.Speech.optSAPI5Voice.$t"]) {
+                            gpiiModel.gpii_primarySchema_readWriteGoldVoice = rwgSettings["ApplicationSettings.Speech.optSAPI5Voice.$t"];
+                        }
+                        if (rwgSettings["ApplicationSettings.Speech.optSAPI5Pitch.$t"]) {
+                            gpiiModel.gpii_primarySchema_readWriteGoldPitch = rwgSettings["ApplicationSettings.Speech.optSAPI5Pitch.$t"];
+                        }
+                        if (rwgSettings["ApplicationSettings.Speech.optSAPI5Speed.$t"]) {
+                            gpiiModel.gpii_primarySchema_readWriteGoldSpeed = rwgSettings["ApplicationSettings.Speech.optSAPI5Speed.$t"];
+                        }
+                        if (rwgSettings["ApplicationSettings.Speech.optSAPI5Volume.$t"]) {
+                            gpiiModel.gpii_primarySchema_readWriteGoldVolume = rwgSettings["ApplicationSettings.Speech.optSAPI5Volume.$t"];
+                        }
+                        if (rwgSettings["ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t"]) {
+                            gpiiModel.gpii_primarySchema_readWriteGoldWordPause = rwgSettings["ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t"];
+                        }
+                    }
+                    /* End Read Write Gold Prototype */
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     fluid.log("GET: Error at retrieving from GPII! Test status: " + textStatus);
@@ -184,6 +206,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
     gpii.prefs.gpiiStore.set = function (model, settings, session, modelTransformFunc, onSuccessfulSetFunction) {
         var transformedModel = [];
         var preferences = session.options.preferenceSet;
+
         var contexts = session.options.context;
         console.log("The new model is: \n"+model);
         fluid.each(preferences, function (preference) {
@@ -191,6 +214,30 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
         });
         //transformedModel.push(modelTransformFunc(model));
         transformedModel[session.options.currentSetId] = modelTransformFunc(model);
+
+
+        /* Start Read Write Gold Prototype */
+        if (model.gpii_primarySchema_readWriteGoldEnabled && model.gpii_primarySchema_readWriteGoldEnabled === true) {
+            transformedModel[0]["http://registry.gpii.net/applications/com.texthelp.readWriteGold"] = {}
+            var rwgSettings = transformedModel[0]["http://registry.gpii.net/applications/com.texthelp.readWriteGold"]
+            if (model.gpii_primarySchema_readWriteGoldVoice) {
+                rwgSettings["ApplicationSettings.Speech.optSAPI5Voice.$t"] = model.gpii_primarySchema_readWriteGoldVoice;
+            }
+            if (model.gpii_primarySchema_readWriteGoldPitch) {
+                rwgSettings["ApplicationSettings.Speech.optSAPI5Pitch.$t"] = model.gpii_primarySchema_readWriteGoldPitch;
+            }
+            if (model.gpii_primarySchema_readWriteGoldSpeed) {
+                rwgSettings["ApplicationSettings.Speech.optSAPI5Speed.$t"] = model.gpii_primarySchema_readWriteGoldSpeed;
+            }
+            if (model.gpii_primarySchema_readWriteGoldVolume) {
+                rwgSettings["ApplicationSettings.Speech.optSAPI5Volume.$t"] = model.gpii_primarySchema_readWriteGoldVolume;
+            }
+            if (model.gpii_primarySchema_readWriteGoldWordPause) {
+                rwgSettings["ApplicationSettings.Speech.optSAPI5PauseBetweenWords.$t"] = model.gpii_primarySchema_readWriteGoldWordPause;
+            }
+        }
+        /* End Read Write Gold Prototype */
+
 
         var dataToSend = {
             "contexts": {
