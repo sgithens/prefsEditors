@@ -98,9 +98,9 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
             } else {
                 // already logged in, refresh AT applications
                 // log user out
-                session.logout();
+                // sgithens LGS session.logout();
                 // and log user in again
-                session.login(data.userToken);
+                // sgithens LGS session.login(data.userToken);
                 /* TODO: The above procedure should normally be happening on the GPII side.
                  * Preference management tools should not have session management responsibilities.
                  * This is a work-around for the pilot2 tests.
@@ -109,7 +109,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
             fluid.log("POST: Saved to GPII server");
         }
         else if (operation === "PUT"){
-            session.login(data.userToken);
+            // sgithens LGS session.login(data.userToken);
         }
     };
 
