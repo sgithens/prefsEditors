@@ -192,6 +192,8 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
                         }
                     }
                     /* End Read Write Gold Prototype */
+
+
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     fluid.log("GET: Error at retrieving from GPII! Test status: " + textStatus);
@@ -238,6 +240,41 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
         }
         /* End Read Write Gold Prototype */
 
+        /* Hacks for Magnifier and Screen Reader to remove all the props is the switch is
+         * moved to off so it doesn't launch for that user.
+         */
+        var magnifierPrefs = [
+            "http://registry.gpii.net/common/tracking",
+            "http://registry.gpii.net/common/magnification",
+            "http://registry.gpii.net/common/showCrosshairs",
+            "http://registry.gpii.net/common/magnifierPosition"
+        ];
+
+        var ttsPrefs = [
+            "http://registry.gpii.net/common/pitch",
+            "http://registry.gpii.net/common/keyEcho",
+            "http://registry.gpii.net/common/wordEcho",
+            "http://registry.gpii.net/common/volumeTTS",
+            "http://registry.gpii.net/common/speechRate",
+            "http://registry.gpii.net/common/readingUnit",
+            "http://registry.gpii.net/common/trackingTTS",
+            "http://registry.gpii.net/common/announceCapitals",
+            "http://registry.gpii.net/common/auditoryOutLanguage",
+            "http://registry.gpii.net/common/punctuationVerbosity",
+            "http://registry.gpii.net/common/speakTutorialMessages"
+        ];
+
+        var curModel = transformedModel[0];
+        if (!curModel["http://registry.gpii.net/common/magnifierEnabled"]) {
+            for (var i = 0; i < magnifierPrefs.length; i++) {
+                delete curModel[magnifierPrefs[i]];
+            }
+        }
+        if (!curModel["http://registry.gpii.net/common/screenReaderTTSEnabled"]) {
+            for (var i = 0; i < ttsPrefs.length; i++) {
+                delete curModel[ttsPrefs[i]];
+            }
+        }
 
         var dataToSend = {
             "contexts": {
